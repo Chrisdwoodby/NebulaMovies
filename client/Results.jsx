@@ -5,6 +5,7 @@ import AUTH_TOKEN from '../config.js';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Homepage from './Homepage.jsx';
+import Row from 'react-bootstrap/Row';
 
 const Results = function(props) {
 
@@ -17,6 +18,7 @@ const Results = function(props) {
     axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${AUTH_TOKEN}&language=en-US&page=${page}`)
     .then(response => {
     props.getMovies(response.data.results);
+    console.log(response.data.results);
     setLoading(false);
     props.setLimit(response.data.total_pages)
     })
@@ -41,15 +43,17 @@ const Results = function(props) {
 
 
   return (
+    <div id="background">
     <Container>
-      <h1>results here</h1>
+      <h1 id="trending">Trending Now</h1>
       {!loading &&
       <>
       {props.renderMovies()}
-        <Button onClick={getMoreMovies}>view more</Button>
+        <Row><Button id="addmore" onClick={getMoreMovies}>view more</Button></Row>
       </>
       }
     </Container>
+    </div>
   )
 }
 

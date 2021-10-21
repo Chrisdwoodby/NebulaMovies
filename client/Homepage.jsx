@@ -8,7 +8,10 @@ import AUTH_TOKEN from '../config.js';
 import Card from 'react-bootstrap/Card';
 import SelectedTitle from './SelectedTitle.jsx';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal'
+import Modal from 'react-bootstrap/Modal';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Footer from './Footer.jsx'
 
 const Homepage = function(props) {
 
@@ -17,6 +20,8 @@ const Homepage = function(props) {
   const [pageLimit, setLimit] = useState('');
   const [selectedId, setTitleId] = useState(null);
   const [show, setShow] = useState(false);
+  const [averageRating, getAverageRating] = useState('');
+  const [sorted, sortList] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -35,23 +40,42 @@ const Homepage = function(props) {
   }
 
   const renderMovies = function() {
+    if (sorted === 'rating') {
+      movies.sort((a, b) => (a.vote_average < b.vote_average) ? 1 : -1)
+    }
     return (
       movies.map((movie, i) => (
-        <Card key={i} >
-          <img height="75" width="75" src={`https://image.tmdb.org/t/p/w92/${movie.poster_path}`} onClick={id = movie.id} key={i}/>
-          {movie.title}
-          {movie.release_date}
-          <SelectedTitle setTitleId={setTitleId} selectedId={selectedId} id={id}/>
-        </Card>
+        <Row id="background" key={i} style={{padding: "25px"}} >
+          <Col xs={3}>
+            <img height="200" width="200" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              onClick={id = movie.id} key={i}/>
+          </Col>
+          <Col style={{fontFamily: "sans-serif", textTransform:
+            "uppercase", letterSpacing: "2px", paddingTop: "25px", backgroundColor: "#d1d7e0",
+             borderRadius: "15px", fontWeight: "bold"}}>
+            <Row style={{paddingBottom: "25px", alignItems: "center", display: "flex",
+              justifyContent: "center"}}>{`${movie.title} - ${movie.release_date.slice(0, 4)}`}</Row>
+            <Row style={{paddingBottom: "25px", alignItems: "center", display: "flex",
+              justifyContent: "center"}}>{`Rated ${movie.vote_average}/10`}</Row>
+            <Row style={{paddingLeft: "200px", paddingRight: "200px", paddingBottom: "10px",
+              alignItems: "center", display: "flex", justifyContent: "center"}}>
+              <SelectedTitle setTitleId={setTitleId} selectedId={selectedId} id={id}/>
+            </Row>
+          </Col>
+        </Row>
       ))
     )
   }
 
   return (
-    <>
-      <Navigation renderSearched={renderSearched} renderMovies={renderMovies} />
-      <Results renderMovies={renderMovies} movies={movies} getMovies={getMovies} setLimit={setLimit} pageLimit={pageLimit}/>
-    </>
+    <div>
+      <Navigation sortList={sortList} movies={movies} getMovies={getMovies} renderSearched={renderSearched}
+        renderMovies={renderMovies} setLimit={setLimit} pageLimit={pageLimit}/>
+      <Results averageRating={averageRating} getAverageRating={getAverageRating}
+        renderMovies={renderMovies} movies={movies} getMovies={getMovies}
+        setLimit={setLimit} pageLimit={pageLimit}/>
+      <Footer/>
+    </div>
   )
 
 }

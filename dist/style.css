@@ -1,0 +1,73 @@
+.special_modal .modal-content{
+  background-color: #564f6f;
+  color: #fff;
+}
+
+#background {
+  background: #2d283e;
+}
+
+#navigation {
+  background: #d1d7e0;
+}
+
+#search {
+  background: #802bb1;
+  color: white;
+  border: none;
+}
+
+#logo {
+  color: #802bb1;
+  font-family: sans-serif;
+  letter-spacing: 2px;
+  font-weight: bold;
+  padding-left: 75px;
+  padding-right: 50px;
+}
+
+#trending {
+  font-family: sans-serif;
+  letter-spacing: 2px;
+  color: #d1d7e0;
+  padding: 50px;
+}
+
+#addmore {
+  background: #802bb1;
+  color: white;
+  border: none;
+  text-align: center;
+  padding: 10px;
+}
+
+#title {
+  font-family: sans-serif;
+  letter-spacing: 2px;
+  color: #d1d7e0;
+}
+
+#description {
+  font-family: sans-serif;
+  letter-spacing: 2px;
+  color: #d1d7e0;
+}
+
+#footer {
+  background: #2d283e;
+  padding-top: 200px;
+}
+
+#footerLogo {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  color: #d1d7e0;
+}
+
+#runtime {
+  padding-top: 200px;
+  font-family: sans-serif;
+  letter-spacing: 2px;
+  color: #d1d7e0;
+}
