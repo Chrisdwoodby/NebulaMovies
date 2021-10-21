@@ -4,8 +4,7 @@
   "description": "Movie database app for users to easily search for their desired movie",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "start:dev": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
     "build": "webpack --mode development --config webpack.config.js"
   },
   "repository": {
@@ -26,6 +25,7 @@
     "bootstrap": "^5.1.3",
     "cli": "^1.0.1",
     "css-loader": "^6.4.0",
+    "nodemon": "^2.0.12",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
     "lodash": "^4.17.21",
