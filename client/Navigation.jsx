@@ -31,8 +31,12 @@ const Navigation = function(props) {
     props.renderMovies();
   }
 
-  const sortByRating= function() {
+  const sortByRating = function() {
     props.sortList('rating');
+    props.renderMovies();
+  }
+  const sortByYear = function() {
+    props.sortList('year');
     props.renderMovies();
   }
 
@@ -48,8 +52,12 @@ const Navigation = function(props) {
           className="mr-auto my-2 my-lg-0"
           style={{ maxHeight: '100px' }}
           navbarScroll>
-          <Nav.Link href="#action1" onClick={renderHome} style={{paddingRight: "100px"}}>Home</Nav.Link>
-          <Nav.Link href="#action2" onClick={sortByRating} style={{paddingRight: "100px"}}>Sort by rating</Nav.Link>
+          <Nav.Link href="#action1" onClick={renderHome}
+            style={{paddingRight: "100px"}}>Most Popular</Nav.Link>
+          <Nav.Link href="#action2" onClick={sortByRating}
+            style={{paddingRight: "100px"}}>Sort by Rating</Nav.Link>
+          <Nav.Link href="#action3" onClick={sortByYear}
+            style={{paddingRight: "100px"}}>Sort by Year</Nav.Link>
         </Nav>
         <Form className="d-flex">
           <FormControl
@@ -59,7 +67,7 @@ const Navigation = function(props) {
             aria-label="Search"
             onChange={event => searchedTitle(event.target.value)}
           />
-          <Button id="search" onClick={handleSubmit} variant="outline-success">Search</Button>
+          <Button id="search" onClick={handleSubmit}>Search</Button>
         </Form>
       </Navbar.Collapse>
     </Navbar>

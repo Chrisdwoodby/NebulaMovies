@@ -1,14 +1,10 @@
 import React, {useState} from "react";
 import Navigation from './Navigation.jsx';
 import Results from './Results.jsx';
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import axios from 'axios';
 import AUTH_TOKEN from '../config.js';
-import Card from 'react-bootstrap/Card';
 import SelectedTitle from './SelectedTitle.jsx';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Footer from './Footer.jsx'
@@ -32,7 +28,6 @@ const Homepage = function(props) {
     axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${AUTH_TOKEN}&query=${title}`)
     .then(response => {
       getMovies(response.data.results);
-      console.log(response.data)
     })
     .catch(error => {
       console.log(`${error}: An error has occured while selecting results for ${props.searchInput}`)
@@ -42,6 +37,9 @@ const Homepage = function(props) {
   const renderMovies = function() {
     if (sorted === 'rating') {
       movies.sort((a, b) => (a.vote_average < b.vote_average) ? 1 : -1)
+    }
+    if (sorted === 'year') {
+      movies.sort((a, b) => (Number(a.release_date.slice(0, 4)) < Number(b.release_date.slice(0, 4))) ? 1 : -1)
     }
     return (
       movies.map((movie, i) => (
@@ -56,10 +54,10 @@ const Homepage = function(props) {
             <Row style={{paddingBottom: "25px", alignItems: "center", display: "flex",
               justifyContent: "center"}}>{`${movie.title} - ${movie.release_date.slice(0, 4)}`}</Row>
             <Row style={{paddingBottom: "25px", alignItems: "center", display: "flex",
-              justifyContent: "center"}}>{`Rated ${movie.vote_average}/10`}</Row>
+              justifyContent: "center"}}>{`Average Rating: ${movie.vote_average}/10`}</Row>
             <Row style={{paddingLeft: "200px", paddingRight: "200px", paddingBottom: "10px",
               alignItems: "center", display: "flex", justifyContent: "center"}}>
-              <SelectedTitle setTitleId={setTitleId} selectedId={selectedId} id={id}/>
+              <SelectedTitle setTitleId={setTitleId} id={id}/>
             </Row>
           </Col>
         </Row>

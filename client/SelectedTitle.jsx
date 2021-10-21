@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import Container from 'react-bootstrap/Container';
 import axios from 'axios';
 import AUTH_TOKEN from '../config.js';
-import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Homepage from './Homepage.jsx';
 import Modal from 'react-bootstrap/Modal';
@@ -27,7 +26,6 @@ const SelectedTitle = function(props) {
     setLoading(true);
     axios.get(`https://api.themoviedb.org/3/movie/${props.id}?api_key=${AUTH_TOKEN}&language=en-US`)
     .then((response) => {
-      console.log("modal", response);
       setRuntime(response.data.runtime + ' Minutes');
       setPosterPath(response.data.poster_path);
       setTitle(response.data.title);
@@ -66,18 +64,22 @@ const SelectedTitle = function(props) {
 
   return (
     <>
-      <Button onClick={handleClick} style={{border: "none", backgroundColor: "#802bb1"}}>
+      <Button onClick={handleClick} style={{border: "none",
+        backgroundColor: "#802bb1"}}>
         view details
       </Button>
       {!loading &&
-      <Modal className="special_modal" size="lg" show={show} onHide={handleClose}>
+      <Modal className="special_modal" size="lg" show={show}
+        onHide={handleClose}>
         <Modal.Header>
           <Modal.Title id="title">{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row>
             <Col>
-              <Row><img height="400" width="400" src={`https://image.tmdb.org/t/p/w500/${poster}`}/></Row>
+              <Row>
+                <img height="400" width="400" src={`https://image.tmdb.org/t/p/w500/${poster}`}/>
+              </Row>
             </Col>
             <Col>
               <Row id="description">{overview}</Row>
