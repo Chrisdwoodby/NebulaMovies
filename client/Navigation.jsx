@@ -1,11 +1,20 @@
-import React from 'react';
+import React , {useState} from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
+import Homepage from './Homepage.jsx';
 
-const Navigation = function() {
+const Navigation = function(props) {
+  const [searchInput, searchedTitle] = useState('');
+
+  const handleSubmit = function() {
+    props.renderSearched(searchInput);
+    props.renderMovies()
+  }
+
+
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
@@ -23,8 +32,9 @@ const Navigation = function() {
             placeholder="Search"
             className="mr-2"
             aria-label="Search"
+            onChange={event => searchedTitle(event.target.value)}
           />
-          <Button variant="outline-success">Search</Button>
+          <Button onClick={handleSubmit} variant="outline-success">Search</Button>
         </Form>
       </Navbar.Collapse>
     </Navbar>
